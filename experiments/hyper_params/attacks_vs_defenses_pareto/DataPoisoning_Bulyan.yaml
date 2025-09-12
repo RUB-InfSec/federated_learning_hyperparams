@@ -1,0 +1,71 @@
+resources:
+  devices: "0"
+  cpus_per_client: 1
+  gpus_per_client: 0.1
+
+# General setting
+num_clients: 100
+clients_per_round: 10
+num_rounds: 1200
+partitioning: 'dirichlet'
+partitioning_hyperparam: 0.9
+
+# Strategy
+strategy:
+  name: 'fedavg'
+  lr_scheduler:
+    name: 'exp'
+    gamma: 0.999
+
+# Load trained model
+load_benign_model:
+  trained_rounds: 900
+  experiment_descriptor: 'BenignTraining_0.1_decay'
+
+# Task configuration
+dataset: 'cifar10'
+model: 'resnet20'
+batch_size: 64
+optimizer:
+  name: 'sgd'
+  local_lr: 0.1
+  momentum: 0.9
+  weight_decay: 0.0005
+lr_scheduler:
+  name:
+  step_size: 2
+  gamma: 0.8
+local_epochs: 2
+
+# Adversary configuration
+attacker:
+  name: 'data_poisoning'
+adversarial_optimizer:
+  name: 'sgd'
+  local_lr:
+  momentum: 0.9
+  weight_decay: 0.0005
+adversarial_lr_scheduler:
+  name:
+local_epochs_malicious_clients: 2
+compromised_clients: 0.1
+
+# Backdoor configuration
+backdoor:
+  type: 'artificial_trigger'
+  source_class:
+  target_class: 9
+  poison_ratio: 0.4
+poisoning_scheduler:
+  name: 'interval'
+  start_round: 1000
+  end_round: 1100
+
+# Defense
+defense:
+  name: 'bulyan'
+  f: 1
+
+# Differential Privacy
+differential_privacy:
+  enabled: false

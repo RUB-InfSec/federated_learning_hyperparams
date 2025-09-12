@@ -1,0 +1,76 @@
+resources:
+  devices: "3"
+  cpus_per_client: 1
+  gpus_per_client: 0.1
+
+# General setting
+num_clients: 100
+clients_per_round: 10
+num_rounds: 205
+partitioning: 'dirichlet'
+partitioning_hyperparam: 0.9
+
+# Strategy
+strategy:
+  name: 'fedavg'
+  lr_scheduler:
+    name: 'exp'
+    gamma: 0.999
+
+# Load trained model
+load_benign_model:
+    trained_rounds: 900
+    experiment_descriptor: 'BenignTraining_0.1_decay'
+
+# Task configuration
+dataset: 'cifar10'
+model: 'resnet20'
+batch_size: 64
+optimizer:
+  name: 'sgd'
+  local_lr: 0.1
+  momentum: 0.9
+  weight_decay: 0.0005
+lr_scheduler:
+  name:
+local_epochs: 2
+
+# Adversary configuration
+attacker:
+  name: 'fcba'
+  scale_weights_poison: 100 # This is set to be N / eta (where eta is not the eta used here but 0.1)
+  trigger_num: 4
+  alpha: 1
+  random_trigger: True
+adversarial_optimizer:
+  name: 'sgd'
+  local_lr: 0.05
+  momentum: 0.9
+  weight_decay: 0.0005
+adversarial_lr_scheduler:
+  name: 'multi_step'
+  milestones: [0.5, 0.834]
+  gamma: 0.1
+local_epochs_malicious_clients: 6
+compromised_clients: 0.1
+
+# Backdoor configuration
+backdoor:
+  type: 'artificial_trigger'
+  source_class:
+  target_class: 2 # bird
+  poison_ratio: 0.03125 # 2 / 64
+poisoning_scheduler:
+  name: 'interval'
+  start_round: 1000
+  end_round: 1100
+
+# Defense
+defense:
+  name: 'foolsgold'
+  memory_size: 10
+  importance: 'hard'
+
+# Differential Privacy
+differential_privacy:
+  enabled: false

@@ -1,0 +1,42 @@
+resources:
+  devices: "0"
+  cpus_per_client: 1
+  gpus_per_client: 1
+
+# General setting
+num_clients: 100
+clients_per_round: 10
+num_rounds: 1000
+partitioning: 'dirichlet'
+partitioning_hyperparam: 0.9
+
+train_benign_model:
+  save_every: 100
+
+# Strategy
+strategy:
+  name: 'fedavg'
+  lr_scheduler:
+    name: 'exp'
+    gamma: 0.999
+
+# Task configuration
+dataset: 'tiny-imagenet'
+model: 'resnet18'
+batch_size: 64
+optimizer:
+  name: 'sgd'
+  local_lr: 0.1
+  momentum: 0.9
+  weight_decay: 0.0005
+lr_scheduler:
+  name:
+local_epochs: 2
+
+# Defense
+defense:
+  name:
+
+# Differential Privacy
+differential_privacy:
+  enabled: false

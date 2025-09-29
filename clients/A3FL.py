@@ -44,7 +44,7 @@ class A3FLClient(DataPoisoningClient):
             self.net.load_state_dict(global_model_copy)
         elif malicious:
             logger.log(DEBUG, "Waiting for trigger optimization...")
-            while ray.get(self.client_communicator.get_something.remote(f'done_trigger_search_{current_round}')) is False:
+            while not ray.get(self.client_communicator.get_something.remote(f'done_trigger_search_{current_round}')):
                 sleep(1)
 
         super().train(self.trainloader, current_round, configuration, malicious)

@@ -25,7 +25,7 @@ class DataPoisoningClient(BenignClient):
 
             self.set_parameters(parameters)
             self.train(self.trainloader, config['current_round'], configuration=configuration, malicious=malicious)
-            return self.get_parameters(self.net), len(self.trainloader), self.metric.to_dict()
+            return self.get_parameters(config), len(self.trainloader), self.metric.to_dict()
         else:
             return super().fit(parameters, config)
 

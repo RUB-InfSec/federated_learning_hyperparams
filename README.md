@@ -308,7 +308,30 @@ We plan to make them available in the future.
 
 ## Citation
 
-_Will be added, once the proceedings of the ACM CCS 2025 conference are published._
+```
+@inproceedings{DBLP:conf/ccs/LachnitK25,
+  author       = {Simon Lachnit and
+                  Ghassan Karame},
+  editor       = {Chun{-}Ying Huang and
+                  Jyh{-}Cheng Chen and
+                  Shiuh{-}Pyng Shieh and
+                  David Lie and
+                  V{\'{e}}ronique Cortier},
+  title        = {On Hyperparameters and Backdoor-Resistance in Horizontal Federated
+                  Learning},
+  booktitle    = {Proceedings of the 2025 {ACM} {SIGSAC} Conference on Computer and
+                  Communications Security, {CCS} 2025, Taipei, Taiwan, October 13-17,
+                  2025},
+  pages        = {1919--1933},
+  publisher    = {{ACM}},
+  year         = {2025},
+  url          = {https://doi.org/10.1145/3719027.3765211},
+  doi          = {10.1145/3719027.3765211},
+  timestamp    = {Mon, 24 Nov 2025 15:33:09 +0100},
+  biburl       = {https://dblp.org/rec/conf/ccs/LachnitK25.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+```
 
 ## Contact
 
